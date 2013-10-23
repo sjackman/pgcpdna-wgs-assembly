@@ -46,8 +46,8 @@ PG29-scaffolds.fa: PG29.orig-NC_021456.sam.tid
 PG29-NC_021456.sam: PG29.orig-NC_021456.sam PG29-scaffolds.fa.fai
 	grep -v '^@' $< |samtools view -Sht PG29-scaffolds.fa.fai - >$@
 
-NC_021456-PG29.sam: PG29-scaffolds.fa PG29-NC_021456.sam
-	samskrit-swap $< <PG29-NC_021456.sam >$@
+NC_021456-PG29.sam: PG29-scaffolds.fa NC_021456.fa.fai PG29-NC_021456.sam
+	samskrit-swap $^ >$@
 
 %.fa.cap.contigs %.fa.cap.singlets: %.fa
 	cap3 $< -p 85 -s 400 >$*.fa.cap.log
